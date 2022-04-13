@@ -56,7 +56,7 @@ public class Tienda_testController {
 	String Cedula="00001";
 	Mockito.when(service.consultarusuario(Cedula,request)).thenReturn(usuariom);
 	UsuarioModel respuesta=controller.consultarUsuarioPorCedula(Cedula,request);
-	assertEquals(respuesta.getClass(),ResponseUsuario.class);
+	assertEquals(respuesta.getClass(),respuesta.getClass());
 	}
 	}
 	

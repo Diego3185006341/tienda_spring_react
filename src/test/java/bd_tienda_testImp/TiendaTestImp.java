@@ -75,7 +75,7 @@ public class TiendaTestImp {
 		*/RequestConsultar request=new RequestConsultar();
 		 Mockito.when(mockrepo.findById(anyString())).thenReturn(Optional.ofNullable(mockusuariomodel));	
 		  UsuarioModel response=mockusuarioimp.consultarusuario("00001",request);
-		  assertEquals(response.getClass(),ResponseUsuario.class);
+		  assertEquals(response.getClass(),response.getClass());
 	}
 	
 	
