@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.bd_tienda_test.Model.UsuarioModel;
+import com.bd_tienda_test.dto.RequestConsultar;
 import com.bd_tienda_test.dto.RequestResponseAgregar;
 
 public interface IUsuarioService {
@@ -18,6 +20,6 @@ public interface IUsuarioService {
 	public void deleteUsuario (String cedula);
 	public ResponseEntity<Object> agregarUsuario(RequestResponseAgregar request);
 	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request);
-	public UsuarioModel consultarusuario(String Cedula);
+	public UsuarioModel consultarusuario(String Cedula,RequestConsultar request);
 	
 }

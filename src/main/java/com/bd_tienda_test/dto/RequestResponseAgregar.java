@@ -1,11 +1,13 @@
 package com.bd_tienda_test.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@Builder
 public class RequestResponseAgregar {
 	private String cedula_Usuario;
 	private String nombre_Usuario;

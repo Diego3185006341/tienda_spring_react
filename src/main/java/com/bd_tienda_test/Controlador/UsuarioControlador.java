@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bd_tienda_test.Interfaces.Service.IUsuarioService;
 import com.bd_tienda_test.Model.UsuarioModel;
+import com.bd_tienda_test.dto.RequestConsultar;
 import com.bd_tienda_test.dto.RequestResponseAgregar;
 
 
@@ -69,7 +70,7 @@ public class UsuarioControlador {
 		return usuario.get();
 	}
 	
-	@PutMapping("/updateUsuario/{Cedula}")
+	/*@PutMapping("/updateUsuario/{Cedula}")
 	public boolean actualizarUsuarioPorCedula(@PathVariable String Cedula, UsuarioModel u) {
 		Optional<UsuarioModel>usuario=serviceUsuario.listarIdUsuario(Cedula);
 		if(usuario.isPresent()) {
@@ -79,7 +80,7 @@ public class UsuarioControlador {
 			return false;
 		}
 	}
-	
+	*/
 	
 	@DeleteMapping ("eliminarUsuario/{Cedula}")
 	public boolean deleteUsuario (@PathVariable String Cedula)
@@ -101,9 +102,9 @@ public class UsuarioControlador {
 	
 
 	@GetMapping ("/consultarUsuario/{Cedula}")
-	public UsuarioModel consultarUsuarioPorCedula (@PathVariable String Cedula)
+	public UsuarioModel consultarUsuarioPorCedula (@PathVariable String Cedula,RequestConsultar request)
 	{
-		return  serviceUsuario.consultarusuario(Cedula);
+		return  serviceUsuario.consultarusuario(Cedula,request);
 	}
 	
 }
