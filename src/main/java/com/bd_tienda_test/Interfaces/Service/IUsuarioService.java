@@ -20,6 +20,6 @@ public interface IUsuarioService {
 	public void deleteUsuario (String cedula);
 	public ResponseEntity<Object> agregarUsuario(RequestResponseAgregar request);
 	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request);
-	public UsuarioModel consultarusuario(String Cedula,RequestConsultar request);
+	public ResponseEntity<UsuarioModel> consultarusuario(String Cedula,RequestConsultar request);
 	
 }

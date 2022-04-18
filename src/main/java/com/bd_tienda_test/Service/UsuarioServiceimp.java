@@ -122,7 +122,7 @@ public class UsuarioServiceimp implements IUsuarioService {
 	}
 
 	@Override
-	public UsuarioModel consultarusuario(String Cedula,RequestConsultar request) {
+	/*public UsuarioModel consultarusuario(String Cedula,RequestConsultar request) {
 		Optional<UsuarioModel> u=usuariodb.findById(Cedula);
 		try {
 			
@@ -137,73 +137,23 @@ public class UsuarioServiceimp implements IUsuarioService {
 	}
 
 }
+*/
 
-
-	/*public ResponseEntity<Object> consultarusuario(RequestConsultar request) {
+	public ResponseEntity<UsuarioModel> consultarusuario(String Cedula,RequestConsultar request) {
 		
-		try {
+	
+		Optional<UsuarioModel>u=usuariodb.findById(Cedula);
+		
+		if(u.isPresent()) {
+		return new ResponseEntity<>(u.get(),HttpStatus.OK);
 			
-			String cedula_usuario=null;
-			String nombre_usuario=null;
-			
-			for(Filtros filtros :request.getFiltros()) {
-				if(filtros.getValor()!=null && !filtros.getValor().isEmpty()) {
-					
-					switch(filtros.getParametro()) {
-					case "cedula_usuario":
-						cedula_usuario=filtros.getValor();
-						break;
-					case "nombre_usuario":
-						nombre_usuario=filtros.getValor();
-					default:
-						break;
-					
-					}
-					
-				}
-				
-				
-			}
-		Pageable pagination=crearPaginador(request);
-		Page<UsuarioModel>UsuarioConsultar=usuarioR.Consultarbd(cedula_usuario,nombre_usuario,pagination);
-			if()
-		
-		return ResponseEntity.ok(ResponseUsuario.builder().contenido(UsuarioConsultar.getContent()).build());
-				
-	} catch (Exception e) {
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-				.body(ExceptionSistema.builder().codigo(UsuariosConstantes.CODIGO_ERROR_SERVICE)
-				.description(UsuariosConstantes.ERROR_SERVICE_Errorparcero).build());
-	}
+		}
 		
 		
+	 else {
+		return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-
-	private Pageable crearPaginador(RequestConsultar request) {
-		Integer maximoPaginador=0;
-		Integer numeroPagina=0;
-		if(UsuariosConstantes.TIPO_CONSULTA.equalsIgnoreCase(request.getNumeroPagina())) {
-			maximoPaginador=Integer.MAX_VALUE;
-		}
-		else {
-			Integer pagina=Integer.parseInt(request.getNumeroPagina());
-			numeroPagina=(pagina > 0)? pagina-1:pagina;
-			maximoPaginador=Integer.parseInt(request.getNumeroRegistros());
-		}
-		if(UsuariosConstantes.PARAMETRO_ORDENAMIENTO.equalsIgnoreCase(request.getOrden())) {
-			return PageRequest.of(numeroPagina, maximoPaginador,
-					Sort.by(request.getParametroOrdenamiento()).ascending());
-		}
-		return PageRequest.of(numeroPagina, maximoPaginador,
-				Sort.by(request.getParametroOrdenamiento()).descending());
-	}
-
-	
-
-	
-
-	
-
 		
 }
-*/
+	
+}

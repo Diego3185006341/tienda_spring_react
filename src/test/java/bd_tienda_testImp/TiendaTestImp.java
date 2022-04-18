@@ -74,8 +74,8 @@ public class TiendaTestImp {
 		request.setFiltros(listafiltros);
 		*/RequestConsultar request=new RequestConsultar();
 		 Mockito.when(mockrepo.findById(anyString())).thenReturn(Optional.ofNullable(mockusuariomodel));	
-		  UsuarioModel response=mockusuarioimp.consultarusuario("00001",request);
-		  assertEquals(response.getClass(),response.getClass());
+		  ResponseEntity<UsuarioModel> response=mockusuarioimp.consultarusuario("00001",request);
+		  assertEquals(response.getBody().getClass(),response.getBody().getClass());
 	}
 	
 	

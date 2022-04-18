@@ -102,7 +102,7 @@ public class UsuarioControlador {
 	
 
 	@GetMapping ("/consultarUsuario/{Cedula}")
-	public UsuarioModel consultarUsuarioPorCedula (@PathVariable String Cedula,RequestConsultar request)
+	public ResponseEntity<UsuarioModel> consultarUsuarioPorCedula (@PathVariable String Cedula,RequestConsultar request)
 	{
 		return  serviceUsuario.consultarusuario(Cedula,request);
 	}

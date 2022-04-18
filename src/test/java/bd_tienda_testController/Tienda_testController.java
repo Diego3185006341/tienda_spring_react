@@ -25,7 +25,7 @@ public class Tienda_testController {
 	@Mock
 	IUsuarioService service;
 	@Mock
-	UsuarioModel usuariom;
+	ResponseEntity<UsuarioModel> usuariom;
 
 
 	@InjectMocks
@@ -55,7 +55,7 @@ public class Tienda_testController {
 	RequestConsultar request = new RequestConsultar();
 	String Cedula="00001";
 	Mockito.when(service.consultarusuario(Cedula,request)).thenReturn(usuariom);
-	UsuarioModel respuesta=controller.consultarUsuarioPorCedula(Cedula,request);
+	ResponseEntity<UsuarioModel> respuesta=controller.consultarUsuarioPorCedula(Cedula,request);
 	assertEquals(respuesta.getClass(),respuesta.getClass());
 	}
 	}
