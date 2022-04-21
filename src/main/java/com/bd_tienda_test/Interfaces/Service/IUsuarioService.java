@@ -13,13 +13,13 @@ import com.bd_tienda_test.dto.RequestResponseAgregar;
 public interface IUsuarioService {
 
 	public boolean validarUsuario(String Usuario, String Clave);
-	public List<UsuarioModel> listarUsuarios();
+	public ResponseEntity<List<UsuarioModel>> listarUsuarios();
 	public Optional<UsuarioModel> listarIdUsuario(String Cedula);
 	public int saveUsuario (UsuarioModel u);	
 	public int update(UsuarioModel u);
-	public void deleteUsuario (String cedula);
+	public ResponseEntity<Object> deleteUsuario (String cedula);
 	public ResponseEntity<Object> agregarUsuario(RequestResponseAgregar request);
-	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request);
+	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request,String Cedula);
 	public ResponseEntity<UsuarioModel> consultarusuario(String Cedula,RequestConsultar request);
 	
 }

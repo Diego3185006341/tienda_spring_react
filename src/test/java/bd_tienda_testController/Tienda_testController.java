@@ -46,8 +46,9 @@ public class Tienda_testController {
 	@Test
 	void modificarUsuario(){
 	RequestResponseAgregar request = new RequestResponseAgregar();
-	Mockito.when(service.modificarUsuario(request)).thenReturn(ResponseEntity.ok().body(RequestResponseAgregar.builder().build()));
-	ResponseEntity<Object>respuesta=controller.modificarUsuario(request);
+	String Cedula="01233";
+	Mockito.when(service.modificarUsuario(request,Cedula)).thenReturn(ResponseEntity.ok().body(RequestResponseAgregar.builder().build()));
+	ResponseEntity<Object>respuesta=controller.modificarUsuario(request,Cedula);
 	assertEquals(respuesta.getBody().getClass(),RequestResponseAgregar.class);
 	}
 	@Test

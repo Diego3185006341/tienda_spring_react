@@ -1,5 +1,6 @@
 package com.bd_tienda_test.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,8 +46,18 @@ public class UsuarioServiceimp implements IUsuarioService {
 	}
 
 	@Override
-	public List<UsuarioModel> listarUsuarios() {
-		return (List<UsuarioModel>)usuariodb.findAll();
+	public ResponseEntity<List<UsuarioModel>> listarUsuarios() {
+		
+		try {
+			List<UsuarioModel>usuario=new ArrayList<UsuarioModel>();
+			
+			usuariodb.findAll().forEach(usuario ::add);
+			return new ResponseEntity<>(usuario,HttpStatus.OK); 
+			
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 
 	@Override
@@ -66,8 +77,13 @@ public class UsuarioServiceimp implements IUsuarioService {
 	}
 
 	@Override
-	public void deleteUsuario (String cedula) {
-		usuariodb.deleteById(cedula);
+	public ResponseEntity<Object> deleteUsuario (String cedula) {
+		try {
+			
+			usuariodb.deleteById(cedula);
+			return new ResponseEntity<>(cedula,HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);		}
 		
 	}
 
@@ -82,43 +98,47 @@ public class UsuarioServiceimp implements IUsuarioService {
 		try {
 			Optional<UsuarioModel>u=usuariodb.findById(request.getCedula_Usuario());
 				
-			if(u.isEmpty()) {
+			if(u.isPresent()) {
 				
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			
+			}else {
 			usuariodb.save(UsuarioModel.builder().cedula_Usuario(request.getCedula_Usuario()).nombre_Usuario(request.getNombre_Usuario())
-			.correo_Usuario(request.getCorreo_Usuario()).usuario(request.getUsuario()).clave_Usuario(request.getClave_Usuario()).build());
-			
-				
-			}
-			else {
-				System.out.println("error");
-			}
+					.correo_Usuario(request.getCorreo_Usuario()).usuario(request.getUsuario()).clave_Usuario(request.getClave_Usuario()).build());
+					
+			return new ResponseEntity<>(request,HttpStatus.CREATED);
 			
 			
-			
+			}	
 		} catch (Exception e) {
-			
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return ResponseEntity.ok().body(request);
+		
 	}
 
 	@Override
-	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request) {
+	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request,String Cedula) {
 		try {
-			Optional<UsuarioModel>u=usuariodb.findById(request.getCedula_Usuario());
-			if(u.isPresent()) {
+			Optional<UsuarioModel>u=usuariodb.findById(Cedula);
+				
+			if(u.isEmpty()) {
+				
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			
-			usuariodb.save(UsuarioModel.builder().cedula_Usuario(request.getCedula_Usuario()).nombre_Usuario(request.getNombre_Usuario())
-			.correo_Usuario(request.getCorreo_Usuario()).usuario(request.getUsuario()).clave_Usuario(request.getClave_Usuario()).build());
-			return ResponseEntity.ok().body(request);
+			}else {
+				UsuarioModel usuario=u.get();
+				usuario.setClave_Usuario(request.getClave_Usuario());
+				usuario.setCorreo_Usuario(request.getCorreo_Usuario());
+				usuario.setNombre_Usuario(request.getNombre_Usuario());
+				usuario.setUsuario(request.getUsuario());
+					
+			return new ResponseEntity<>(usuariodb.save(usuario),HttpStatus.OK);
 			
-			}
-		
-		
-		
-	} catch (Exception e) {
-		// TODO: handle exception
-	}
-		return ResponseEntity.ok().body(request);
+			
+			}	
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@Override
@@ -141,18 +161,24 @@ public class UsuarioServiceimp implements IUsuarioService {
 
 	public ResponseEntity<UsuarioModel> consultarusuario(String Cedula,RequestConsultar request) {
 		
-	
-		Optional<UsuarioModel>u=usuariodb.findById(Cedula);
-		
-		if(u.isPresent()) {
-		return new ResponseEntity<>(u.get(),HttpStatus.OK);
+	   try {
+		   Optional<UsuarioModel>u=usuariodb.findById(Cedula);
 			
-		}
+			if(u.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				
+			}
+			else {
+				return new ResponseEntity<>(u.get(),HttpStatus.OK);
+			}
 		
-		
-	 else {
-		return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	} catch (Exception e) {
+		return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+		
+		
+		
+	 
 		
 }
 	

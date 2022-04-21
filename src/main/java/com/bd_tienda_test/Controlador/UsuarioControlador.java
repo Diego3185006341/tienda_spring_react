@@ -45,7 +45,7 @@ public class UsuarioControlador {
 
 	
 	@GetMapping("/listarUsuario")
-	public List<UsuarioModel> listarUsuario()
+	public ResponseEntity<List<UsuarioModel>> listarUsuario()
 	{
 		return serviceUsuario.listarUsuarios();
 	}
@@ -83,10 +83,10 @@ public class UsuarioControlador {
 	*/
 	
 	@DeleteMapping ("eliminarUsuario/{Cedula}")
-	public boolean deleteUsuario (@PathVariable String Cedula)
+	public ResponseEntity<Object> deleteUsuario (@PathVariable String Cedula)
 	{
-		serviceUsuario.deleteUsuario(Cedula);
-		return true;
+		return serviceUsuario.deleteUsuario(Cedula);
+		
 	}
 	@PostMapping("/agregarUsuario")
 	public ResponseEntity<Object> AgregarUsuario (@RequestBody RequestResponseAgregar request) {
@@ -95,9 +95,9 @@ public class UsuarioControlador {
 	}	
 
 	@PostMapping("/modificarUsuario/{Cedula}")
-	public ResponseEntity<Object> modificarUsuario (@RequestBody RequestResponseAgregar request) {
+	public ResponseEntity<Object> modificarUsuario (@RequestBody RequestResponseAgregar request,@PathVariable String Cedula) {
 		
-		return serviceUsuario.modificarUsuario(request);
+		return serviceUsuario.modificarUsuario(request,Cedula );
 	}
 	
 
