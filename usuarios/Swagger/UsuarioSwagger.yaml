@@ -1,0 +1,167 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /v1/users/agregarUsuarios:
+    put:
+      tags:
+        - usuarios-controller
+      operationId: agregarUsuarios
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestResponseDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseMenssage'
+  /v1/users/modificarUsuario:
+    post:
+      tags:
+        - usuarios-controller
+      operationId: modificarUsuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestResponseDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseMenssage'
+  /v1/users/filtros:
+    post:
+      tags:
+        - usuarios-controller
+      operationId: consultafiltros
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FiltrosDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestResponseDto'
+  /v1/users/consultaUsuario:
+    get:
+      tags:
+        - usuarios-controller
+      operationId: consulta
+      parameters:
+        - name: request
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/RequesDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RequestResponseDto'
+  /v1/users/consultaDeUsuarios:
+    get:
+      tags:
+        - usuarios-controller
+      operationId: consultausuarios
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestResponseDto'
+  /v1/users/eliminarUsuario:
+    delete:
+      tags:
+        - usuarios-controller
+      operationId: eliminarUsuario
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponseMenssage'
+components:
+  schemas:
+    RequestResponseDto:
+      type: object
+      properties:
+        usuarioId:
+          type: integer
+          format: int32
+        primerNombre:
+          type: string
+        segundoNombre:
+          type: string
+        primerApellido:
+          type: string
+        segundoApellido:
+          type: string
+        tipoIdentificacion:
+          type: string
+        numeroIdentificacion:
+          type: string
+        celular:
+          type: string
+        direccion:
+          type: string
+        correo:
+          type: string
+        fechaIngreso:
+          type: string
+          format: date
+        fechaCreacion:
+          type: string
+          format: date-time
+        fechaModificacion:
+          type: string
+          format: date-time
+    ResponseMenssage:
+      type: object
+      properties:
+        message:
+          type: string
+    FiltrosDto:
+      type: object
+      properties:
+        filtros:
+          type: array
+          items:
+            $ref: '#/components/schemas/FriltroDetalle'
+    FriltroDetalle:
+      type: object
+      properties:
+        parametro:
+          type: string
+        valor:
+          type: string
+    RequesDto:
+      type: object
+      properties:
+        numeroIdentificacion:
+          type: string
