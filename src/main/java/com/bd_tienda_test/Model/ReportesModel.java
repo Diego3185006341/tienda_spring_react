@@ -1,4 +1,5 @@
 package com.bd_tienda_test.Model;
+ 
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
