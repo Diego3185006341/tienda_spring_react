@@ -2,6 +2,8 @@ package com.bd_tienda_test.dto;
 
 import java.util.List;
 
+import com.bd_tienda_test.Model.UsuarioModel;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +20,6 @@ public class RequestConsultar {
 	private String orden;
 	private String parametroOrdenamiento;
 	*/
+	private List<UsuarioModel>content;
 	private String cedula_usuario;
 }

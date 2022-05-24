@@ -60,7 +60,7 @@ public class UsuarioServiceimp implements IUsuarioService {
 		
 	}
 
-	@Override
+	/*/@Override
 	public Optional<UsuarioModel> listarIdUsuario(String Cedula) {		
 		return usuariodb.findById(Cedula);
 	}
@@ -75,15 +75,19 @@ public class UsuarioServiceimp implements IUsuarioService {
 		}
 		return res;
 	}
-
+*/  
 	@Override
 	public ResponseEntity<Object> deleteUsuario (String cedula) {
 		try {
 			
 			usuariodb.deleteById(cedula);
-			return new ResponseEntity<>(cedula,HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(cedula,HttpStatus.OK);
+			
+			
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);		}
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);		
+			}
+		
 		
 	}
 
@@ -159,7 +163,7 @@ public class UsuarioServiceimp implements IUsuarioService {
 }
 */
 
-	public ResponseEntity<UsuarioModel> consultarusuario(String Cedula,RequestConsultar request) {
+	public ResponseEntity<RequestResponseAgregar> consultarusuario(String Cedula,RequestResponseAgregar request) {
 		
 	   try {
 		   Optional<UsuarioModel>u=usuariodb.findById(Cedula);
@@ -169,7 +173,14 @@ public class UsuarioServiceimp implements IUsuarioService {
 				
 			}
 			else {
-				return new ResponseEntity<>(u.get(),HttpStatus.OK);
+				UsuarioModel consulta=u.get();
+				RequestResponseAgregar respuesta=new RequestResponseAgregar();
+				respuesta.setCedula_Usuario(consulta.getCedula_Usuario());
+				respuesta.setClave_Usuario(consulta.getClave_Usuario());
+				respuesta.setCorreo_Usuario(consulta.getCorreo_Usuario());
+				respuesta.setNombre_Usuario(consulta.getNombre_Usuario());
+				respuesta.setUsuario(consulta.getUsuario());
+				return new ResponseEntity<>(respuesta,HttpStatus.OK);
 			}
 		
 	} catch (Exception e) {

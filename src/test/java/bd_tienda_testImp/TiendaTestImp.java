@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -72,12 +73,21 @@ public class TiendaTestImp {
 		request.setParametroOrdenamiento("ASC");
 		
 		request.setFiltros(listafiltros);
-		*/RequestConsultar request=new RequestConsultar();
-		 Mockito.when(mockrepo.findById(anyString())).thenReturn(Optional.ofNullable(mockusuariomodel));	
-		  ResponseEntity<UsuarioModel> response=mockusuarioimp.consultarusuario("00001",request);
-		  assertEquals(response.getBody().getClass(),response.getBody().getClass());
+		
+		*/Optional<UsuarioModel>usuario=Optional.of(mab());
+		RequestResponseAgregar request=new RequestResponseAgregar();
+
+		 Mockito.when(mockrepo.findById(anyString())).thenReturn((usuario));	
+		  ResponseEntity<RequestResponseAgregar> response=mockusuarioimp.consultarusuario("00001",request);
+		  assertEquals(response.getBody().getClass(),RequestResponseAgregar.class );
 	}
-	
+	private UsuarioModel mab(){
+		UsuarioModel prueba=new UsuarioModel();
+		prueba.setClave_Usuario("fdfdf");
+		prueba.setCorreo_Usuario("sssaa");
+		return prueba;
+		
+	}
 	
 	
 }
