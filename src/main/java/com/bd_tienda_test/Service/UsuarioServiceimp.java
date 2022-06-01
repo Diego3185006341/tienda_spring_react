@@ -77,17 +77,38 @@ public class UsuarioServiceimp implements IUsuarioService {
 	}
 */  
 	@Override
-	public ResponseEntity<Object> deleteUsuario (String cedula) {
-		try {
+	public ResponseEntity<ResponseUsuario> deleteUsuario (String Cedula) {
+		/*try {
+			ResponseUsuario response=new ResponseUsuario();
+			Optional<UsuarioModel> consulta = 
+					usuariodb.findById(request.getCedula_Usuario());
 			
-			usuariodb.deleteById(cedula);
-			return new ResponseEntity<>(cedula,HttpStatus.OK);
+			if(consulta.isPresent()) {
+				usuariodb.deleteById(consulta.get().getCedula_Usuario());
+				response.setMessage("se elimino usuario");
+				
+				
+			}else {
+				
+				
+				response.setMessage("no se encontro usuario");
+			}
+			return ResponseEntity.ok(response);	
+			
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);		
+			}
+		*/
+		try {
+			ResponseUsuario response=new ResponseUsuario();
+			usuariodb.deleteById(Cedula);
+			response.setMessage("se elimino usuario");
+			return new ResponseEntity<>(response,HttpStatus.OK);
 			
 			
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);		
 			}
-		
 		
 	}
 
@@ -121,9 +142,9 @@ public class UsuarioServiceimp implements IUsuarioService {
 	}
 
 	@Override
-	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request,String Cedula) {
+	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request) {
 		try {
-			Optional<UsuarioModel>u=usuariodb.findById(Cedula);
+			Optional<UsuarioModel>u=usuariodb.findById(request.getCedula_Usuario());
 				
 			if(u.isEmpty()) {
 				
@@ -131,6 +152,7 @@ public class UsuarioServiceimp implements IUsuarioService {
 			
 			}else {
 				UsuarioModel usuario=u.get();
+				usuario.setCedula_Usuario(request.getCedula_Usuario());
 				usuario.setClave_Usuario(request.getClave_Usuario());
 				usuario.setCorreo_Usuario(request.getCorreo_Usuario());
 				usuario.setNombre_Usuario(request.getNombre_Usuario());
@@ -192,5 +214,17 @@ public class UsuarioServiceimp implements IUsuarioService {
 	 
 		
 }
+
+	@Override
+	public Optional<UsuarioModel> listarIdUsuario(String Cedula) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int saveUsuario(UsuarioModel u) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

@@ -15,5 +15,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseUsuario {
 
-	private List<UsuarioModel>contenido;
+
+	private String Message;
 }

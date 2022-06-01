@@ -1,0 +1,51 @@
+.flex{
+	display: flex !important;
+}
+
+.anchoMenu{
+	width: 86vw;
+}
+
+.ReportesTitulo{
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	background-color: rgb(24, 23, 23);
+	
+}
+.ReportesTitulo h1{
+color: white;
+}
+
+
+
+.FontBotonReporte{
+
+    font-size: 22px;
+}
+
+.MarginBotonReporte{
+    margin:50px;
+}
+
+.Contenido_Reportes {
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 20vh;
+}
+
+.Contenido_Reportes input {
+	width: 25vw;
+	height: 5vh;
+	font-size: 1.5vw;
+	border-radius: 10px;
+}
+
+.VentasClientesTablaAncho{
+    width: 85%;
+	margin-top: 40px;
+}

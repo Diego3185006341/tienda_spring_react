@@ -1,0 +1,98 @@
+.flex{
+	display: flex !important;
+}
+
+.anchoMenu{
+	width: 86vw;
+}
+
+.VentasTitulo{
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	background-color: rgb(24, 23, 23);
+
+}
+
+.VentasTitulo h1{
+    color: white;
+    }
+
+.Contenido_Ventas_Informacion {
+	display: flex;
+	justify-content: flex-start;
+	padding-left: 50px;
+	padding-top: 50px;
+	width: 97%;
+}
+
+
+
+.tabla_Datos {
+	width: 51%;
+	margin-right: 81px;
+}
+
+.tabla_Datos td {
+	border-width: 2px;
+	padding-left: 12px;
+}
+
+.tabla_td_select {
+	width: -webkit-fill-available;
+	border: none;
+}
+
+.border_input {
+	border: none;
+}
+
+.tabla_CodigoTotales {
+	width: 40%;
+}
+
+.tabla_CodigoTotales td {
+	border-width: 2px;
+	padding-left: 12px;
+}
+
+
+.alignCenter{
+	text-align: center;
+}
+
+
+.Contenido_Ventas_Factura {
+	padding-left: 50px;
+	padding-top: 50px;
+	width: 97%;
+}
+
+.tabla_Factura {
+	width: 97% !important;
+	border: solid 2px #000000 !important;
+	border: none !important;
+}
+
+.tabla_Factura th {
+	text-align: center;
+}
+
+
+.bordes_Tabla {
+	border: 1px solid;
+}
+
+.color_Gris {
+	background-color: lightgrey;
+}
+
+.select_Producto{
+	text-align: right; 
+	padding-right: 30px;	
+}
+
+.padding-left {
+	padding-left: 15px;
+}

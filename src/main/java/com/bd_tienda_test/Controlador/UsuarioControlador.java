@@ -17,6 +17,7 @@ import com.bd_tienda_test.Interfaces.Service.IUsuarioService;
 import com.bd_tienda_test.Model.UsuarioModel;
 import com.bd_tienda_test.dto.RequestConsultar;
 import com.bd_tienda_test.dto.RequestResponseAgregar;
+import com.bd_tienda_test.dto.ResponseUsuario;
 
 
 
@@ -24,7 +25,8 @@ import com.bd_tienda_test.dto.RequestResponseAgregar;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping
+//@RequestMapping("/api")
 public class UsuarioControlador {
 
 	@Autowired
@@ -82,8 +84,14 @@ public class UsuarioControlador {
 	}
 	*/
 	
+	/*@DeleteMapping ("eliminarUsuario/{Cedula}")
+	public ResponseEntity<ResponseUsuario> deleteUsuario (@RequestBody RequestResponseAgregar request)
+	{
+		return serviceUsuario.deleteUsuario(request);
+		
+	}*/
 	@DeleteMapping ("eliminarUsuario/{Cedula}")
-	public ResponseEntity<Object> deleteUsuario (@PathVariable String Cedula)
+	public ResponseEntity<ResponseUsuario> deleteUsuario (@PathVariable String Cedula)
 	{
 		return serviceUsuario.deleteUsuario(Cedula);
 		
@@ -94,10 +102,10 @@ public class UsuarioControlador {
 		return serviceUsuario.agregarUsuario(request);
 	}	
 
-	@PostMapping("/modificarUsuario/{Cedula}")
-	public ResponseEntity<Object> modificarUsuario (@RequestBody RequestResponseAgregar request,@PathVariable String Cedula) {
+	@PostMapping("/modificarUsuario")
+	public ResponseEntity<Object> modificarUsuario (@RequestBody RequestResponseAgregar request) {
 		
-		return serviceUsuario.modificarUsuario(request,Cedula );
+		return serviceUsuario.modificarUsuario(request );
 	}
 	
 

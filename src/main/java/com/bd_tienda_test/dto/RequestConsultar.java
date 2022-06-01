@@ -20,6 +20,6 @@ public class RequestConsultar {
 	private String orden;
 	private String parametroOrdenamiento;
 	*/
-	private List<UsuarioModel>content;
-	private String cedula_usuario;
+	
+	private String cedula_Usuario;
 }

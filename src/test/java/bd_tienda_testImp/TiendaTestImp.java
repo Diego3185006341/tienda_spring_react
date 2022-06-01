@@ -62,19 +62,8 @@ public class TiendaTestImp {
 	}
 	@Test 
 	void consultarUsuario() {
-		/*RequestConsultar request =new RequestConsultar();
-		List<Filtros>listafiltros=new ArrayList<Filtros>();
 		
-		listafiltros.add(Filtros.builder().parametro("cedula_usuario").valor("00001").build());
-		listafiltros.add(Filtros.builder().parametro("nombre_usuario").valor("casas").build());
-		request.setNumeroPagina("ALL");
-		request.setNumeroRegistros("ALL");
-		request.setOrden("XXX");
-		request.setParametroOrdenamiento("ASC");
-		
-		request.setFiltros(listafiltros);
-		
-		*/Optional<UsuarioModel>usuario=Optional.of(mab());
+		Optional<UsuarioModel>usuario=Optional.of(mab());
 		RequestResponseAgregar request=new RequestResponseAgregar();
 
 		 Mockito.when(mockrepo.findById(anyString())).thenReturn((usuario));	
@@ -88,6 +77,23 @@ public class TiendaTestImp {
 		return prueba;
 		
 	}
-	
+	/*@Test 
+	void deleteUsuario() {
+		
+		Optional<UsuarioModel>usuario=Optional.of(mab());
+		RequestResponseAgregar request=new RequestResponseAgregar();
+		 Mockito.when(mockrepo.findById(anyString())).thenReturn((usuario));	
+		  ResponseEntity<ResponseUsuario> response=mockusuarioimp.deleteUsuario(request);
+		  assertEquals(response.getBody().getClass(),ResponseUsuario.class );
+	}*/
+	@Test 
+	void deleteUsuario() {
+		
+		Optional<UsuarioModel>usuario=Optional.of(mab());
+		RequestResponseAgregar request=new RequestResponseAgregar();
+		 Mockito.when(mockrepo.findById(anyString())).thenReturn((usuario));	
+		  ResponseEntity<ResponseUsuario> response=mockusuarioimp.deleteUsuario("00001");
+		  assertEquals(response.getBody().getClass(),ResponseUsuario.class );
+	}
 	
 }
