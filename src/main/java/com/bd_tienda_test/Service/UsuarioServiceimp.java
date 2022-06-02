@@ -1,7 +1,9 @@
 package com.bd_tienda_test.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,9 @@ import com.bd_tienda_test.Interfaces.IUsuario;
 import com.bd_tienda_test.Interfaces.Service.IUsuarioService;
 import com.bd_tienda_test.Model.UsuarioModel;
 import com.bd_tienda_test.Repository.UsuarioRepository;
+import com.bd_tienda_test.dto.FiltroDetalle;
 import com.bd_tienda_test.dto.Filtros;
+import com.bd_tienda_test.dto.FiltrosDto;
 import com.bd_tienda_test.dto.RequestConsultar;
 import com.bd_tienda_test.dto.RequestResponseAgregar;
 import com.bd_tienda_test.dto.ResponseUsuario;
@@ -225,6 +229,49 @@ public class UsuarioServiceimp implements IUsuarioService {
 	public int saveUsuario(UsuarioModel u) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public ResponseEntity<Object> consultafiltros(FiltrosDto request) {
+		try {
+
+			String  nombre_usuario = null;
+			String correo_usuario = null;
+			if (request.getFiltros() == null || request.getFiltros().isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+			} else {
+				Map<String, String> obtenerFiltros = filtrosUsuario(request.getFiltros());
+
+				nombre_usuario = obtenerFiltros.get("nombre_usuario") != null?(obtenerFiltros.get("nombre_usuario"))
+						: null;
+				correo_usuario = obtenerFiltros.get("correo_usuario")!= null?(obtenerFiltros.get("correo_usuario"))
+						: null; ;
+			}
+
+			List<UsuarioModel> consultaData = usuarioR.consultaUsuarios(nombre_usuario,
+					correo_usuario);
+			List<RequestResponseAgregar> respuesta = new ArrayList<>();
+			consultaData.forEach(value -> respuesta.add(RequestResponseAgregar.builder().cedula_Usuario(value.getCedula_Usuario())
+					.nombre_Usuario(value.getNombre_Usuario()).correo_Usuario(value.getCorreo_Usuario())
+					.usuario(value.getUsuario()).clave_Usuario(value.getClave_Usuario()).build()));
+
+					
+
+			return ResponseEntity.ok(respuesta);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	private Map<String, String> filtrosUsuario(List<FiltroDetalle> filtros) {
+		Map<String, String> returnFiltros = new HashMap<>();
+
+		for (FiltroDetalle filtro : filtros) {
+			returnFiltros.put(filtro.getParametro(), filtro.getValor());
+		}
+
+		return returnFiltros;
 	}
 	
 }

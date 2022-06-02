@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bd_tienda_test.Interfaces.Service.IUsuarioService;
 import com.bd_tienda_test.Model.UsuarioModel;
+import com.bd_tienda_test.dto.FiltrosDto;
 import com.bd_tienda_test.dto.RequestConsultar;
 import com.bd_tienda_test.dto.RequestResponseAgregar;
 import com.bd_tienda_test.dto.ResponseUsuario;
@@ -25,8 +26,8 @@ import com.bd_tienda_test.dto.ResponseUsuario;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping
-//@RequestMapping("/api")
+//@RequestMapping
+@RequestMapping("/api")
 public class UsuarioControlador {
 
 	@Autowired
@@ -115,4 +116,9 @@ public class UsuarioControlador {
 		return  serviceUsuario.consultarusuario(Cedula,request);
 	}
 	
+	@PostMapping("/filtros")
+	public  ResponseEntity<Object> consultafiltros (@RequestBody FiltrosDto request ) {
+		return serviceUsuario.consultafiltros(request);
+		
+	}
 }
