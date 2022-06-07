@@ -111,9 +111,9 @@ public class UsuarioControlador {
 	
 
 	@GetMapping ("/consultarUsuario/{Cedula}")
-	public ResponseEntity<RequestResponseAgregar> consultarUsuarioPorCedula (@PathVariable String Cedula,RequestResponseAgregar request)
+	public ResponseEntity<RequestResponseAgregar> consultarUsuarioPorCedula (@PathVariable String Cedula)
 	{
-		return  serviceUsuario.consultarusuario(Cedula,request);
+		return  serviceUsuario.consultarusuario(Cedula);
 	}
 	
 	@PostMapping("/filtros")

@@ -23,7 +23,7 @@ public interface IUsuarioService {
 	public ResponseEntity<ResponseUsuario> deleteUsuario (String Cedula);
 	public ResponseEntity<Object> agregarUsuario(RequestResponseAgregar request);
 	public ResponseEntity<Object> modificarUsuario(RequestResponseAgregar request);
-	public ResponseEntity<RequestResponseAgregar> consultarusuario(String Cedula,RequestResponseAgregar request);
+	public ResponseEntity<RequestResponseAgregar> consultarusuario(String Cedula);
 	public ResponseEntity<Object> consultafiltros(FiltrosDto request);
 	
 }

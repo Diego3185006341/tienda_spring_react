@@ -47,17 +47,25 @@ public class Tienda_testController {
 	void modificarUsuario(){
 	RequestResponseAgregar request = new RequestResponseAgregar();
 	String Cedula="01233";
-	Mockito.when(service.modificarUsuario(request,Cedula)).thenReturn(ResponseEntity.ok().body(RequestResponseAgregar.builder().build()));
-	ResponseEntity<Object>respuesta=controller.modificarUsuario(request,Cedula);
+	Mockito.when(service.modificarUsuario(request)).thenReturn(ResponseEntity.ok().body(RequestResponseAgregar.builder().build()));
+	ResponseEntity<Object>respuesta=controller.modificarUsuario(request);
 	assertEquals(respuesta.getBody().getClass(),RequestResponseAgregar.class);
 	}
 	@Test
 	void consultarUsuario(){
-	RequestConsultar request = new RequestConsultar();
+	RequestConsultar request = null;
 	String Cedula="00001";
-	Mockito.when(service.consultarusuario(Cedula,request)).thenReturn(usuariom);
-	ResponseEntity<UsuarioModel> respuesta=controller.consultarUsuarioPorCedula(Cedula,request);
-	assertEquals(respuesta.getClass(),respuesta.getClass());
+	Mockito.when(service.consultarusuario(Cedula)).thenReturn(ResponseEntity.ok().body(RequestResponseAgregar.builder().build()));
+	ResponseEntity<RequestResponseAgregar> respuesta=controller.consultarUsuarioPorCedula(Cedula);
+	assertEquals(respuesta.getBody().getClass(),RequestResponseAgregar.class);
+	}
+	@Test
+	void deleteUsuario(){
+	RequestConsultar request = null;
+	String Cedula="00001";
+	Mockito.when(service.deleteUsuario(Cedula)).thenReturn(ResponseEntity.ok().body(ResponseUsuario.builder().build()));
+	ResponseEntity<ResponseUsuario> respuesta=controller.deleteUsuario(Cedula);
+	assertEquals(respuesta.getBody().getClass(),ResponseUsuario.class);
 	}
 	}
 	

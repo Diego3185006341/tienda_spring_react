@@ -64,14 +64,19 @@ public class TiendaTestImp {
 	void consultarUsuario() {
 		
 		Optional<UsuarioModel>usuario=Optional.of(mab());
-		RequestResponseAgregar request=new RequestResponseAgregar();
+		//RequestResponseAgregar request=new RequestResponseAgregar();
 
-		 Mockito.when(mockrepo.findById(anyString())).thenReturn((usuario));	
-		  ResponseEntity<RequestResponseAgregar> response=mockusuarioimp.consultarusuario("00001",request);
+		
+		RequestConsultar requestConsultar=new RequestConsultar();
+		requestConsultar.setCedula_Usuario("00001");
+		String Cedula="00001";
+		Mockito.when(mockrepo.findById(anyString())).thenReturn(usuario);	
+		  ResponseEntity<RequestResponseAgregar> response=mockusuarioimp.consultarusuario(Cedula);
 		  assertEquals(response.getBody().getClass(),RequestResponseAgregar.class );
 	}
 	private UsuarioModel mab(){
 		UsuarioModel prueba=new UsuarioModel();
+	
 		prueba.setClave_Usuario("fdfdf");
 		prueba.setCorreo_Usuario("sssaa");
 		return prueba;

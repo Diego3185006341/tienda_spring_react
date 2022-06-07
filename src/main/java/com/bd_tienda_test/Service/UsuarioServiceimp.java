@@ -189,7 +189,7 @@ public class UsuarioServiceimp implements IUsuarioService {
 }
 */
 
-	public ResponseEntity<RequestResponseAgregar> consultarusuario(String Cedula,RequestResponseAgregar request) {
+	public ResponseEntity<RequestResponseAgregar> consultarusuario(String Cedula) {
 		
 	   try {
 		   Optional<UsuarioModel>u=usuariodb.findById(Cedula);
